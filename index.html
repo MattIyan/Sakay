@@ -134,11 +134,22 @@
       }
 
       function showPopup() {
+        // Get source and destination values
+        var source = document.getElementById("source").value;
+        var destination = document.getElementById("destination").value;
+
+        // Check if source and destination are not empty
+        if (source.trim() === "" || destination.trim() === "") {
+          alert("Please enter both source and destination.");
+          return;
+        }
+
+        // Display the popup
         document.getElementById("popup-container").style.display = "block";
         document.getElementById("overlay").style.display = "block";
       }
 
-      function showPopup() {
+      function redirectToRiderFee() {
         // Get source and destination values
         var source = document.getElementById("source").value;
         var destination = document.getElementById("destination").value;
@@ -151,15 +162,14 @@
           encodeURIComponent(destination);
       }
 
-      function redirectToRiderFee() {
-        // Redirect to the rider fee page
-        window.location.href = "rider_fee_page.html";
-      }
-
       function closePopup() {
         document.getElementById("popup-container").style.display = "none";
         document.getElementById("overlay").style.display = "none";
+
+        // Call redirectToRiderFee after closing the popup
+        redirectToRiderFee();
       }
     </script>
   </body>
 </html>
+
