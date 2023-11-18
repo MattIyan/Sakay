@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rider Fee Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: rgb(173, 252, 252);
+      }
+      #fee-container {
+        text-align: center;
+        max-width: 90%;
+        margin: 0 auto;
+        background-color: rgb(242, 196, 203);
+        padding: 10px;
+        border: 1px solid #0b0b0b;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+      #logo {
+        width: 80px; /* Adjust the size of the logo */
+        height: auto;
+        border-radius: 50px;
+      }
+      #booking-date-time,
+      #booking-id,
+      #fee-amount,
+      #source-destination,
+      #payment-method,
+      #back-to-home-button {
+        padding: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 10px; /* Adjusted margin */
+        width: calc(
+          100% - 10px
+        ); /* Make buttons and inputs full width on small screens */
+        box-sizing: border-box;
+      }
+      select {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fee-container">
+      <img src="sakay.png" alt="Logo" id="logo" />
+      <p id="booking-date-time"><span id="current-date"></span></p>
+      <h1>==============</h1>
+      <p id="booking-id">Booking ID: #123456</p>
+      <h1>==============</h1>
+      <p id="fee-amount">Fee Amount: $10.00</p>
+      <h1>==============</h1>
+      <p id="source-destination">
+        Source: <span id="source"></span>, Destination:
+        <span id="destination"></span>
+      </p>
+      <h1>==============</h1>
+      <label for="payment-method">Select Payment Method:</label>
+      <select id="payment-method">
+        <option value="credit-card">Credit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="cash">Cash</option>
+      </select>
+      <button id="back-to-home-button" onclick="redirectToHome()">
+        Back to Home
+      </button>
+    </div>
+
+    <script>
+      // Function to format the current date and time
+      function getCurrentDateTime() {
+        const options = {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          hour12: true,
+        };
+        return new Date().toLocaleDateString(undefined, options);
+      }
+
+      // Retrieve source and destination from URL parameters
+      var source = getUrlParameter("source");
+      var destination = getUrlParameter("destination");
+
+      console.log("Source:", source);
+      console.log("Destination:", destination);
+
+      // Update HTML content with user input or display "Not available" if empty
+      document.getElementById("source").innerText = source
+        ? source
+        : "Not available";
+      document.getElementById("destination").innerText = destination
+        ? destination
+        : "Not available";
+
+      // Update the current date and time in the HTML
+      document.getElementById("current-date").innerText = getCurrentDateTime();
+
+      // Function to redirect to the home page
+      function redirectToHome() {
+        // Redirect to the home page
+        window.location.href = "index.html";
+      }
+
+      // Function to get URL parameters
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      // Retrieve source and destination from URL parameters
+      var source = getUrlParameter("source");
+      var destination = getUrlParameter("destination");
+
+      // Update HTML content with user input or display "Not available" if empty
+      document.getElementById("source").innerText = source
+        ? source
+        : "Not available";
+      document.getElementById("destination").innerText = destination
+        ? destination
+        : "Not available";
+    </script>
+  </body>
+</html>

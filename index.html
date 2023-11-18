@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Sakay Clone</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: rgb(173, 252, 252);
+      }
+      #intro-container,
+      #form-container,
+      #popup-container {
+        text-align: center;
+        max-width: 80%;
+        margin: 0 auto;
+      }
+      #logo {
+        width: 100px; /* Adjust the size of the logo */
+        height: auto;
+        border-radius: 50px;
+      }
+      #book-now-button,
+      #source,
+      #destination,
+      #plan-route-button {
+        padding: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: rgb(242, 196, 203);
+        border: 1px solid #0b0b0b;
+        border-radius: 5px;
+        margin-top: 10px; /* Adjusted margin */
+        width: calc(
+          100% - 22px
+        ); /* Make buttons and inputs full width on small screens */
+        box-sizing: border-box;
+      }
+      #form-container {
+        display: none;
+      }
+      #form-content {
+        background-color: rgb(242, 196, 203);
+        padding: 20px;
+        border: 1px solid #130f0f;
+        border-radius: 10px;
+        margin-top: 20px;
+        box-sizing: border-box;
+      }
+      #popup-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        width: 80%; /* Adjust the width of the popup on small screens */
+        box-sizing: border-box;
+      }
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+
+      /* Media Queries for responsiveness */
+      @media screen and (max-width: 600px) {
+        #logo {
+          width: 80px;
+        }
+        #popup-container {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="intro-container">
+      <img src="sakay.png" alt="Logo" id="logo" />
+      <h1>DALI SAKAY NA</h1>
+      <button id="book-now-button" onclick="showForm()">Book Now</button>
+    </div>
+
+    <div id="form-container">
+      <img src="sakay.png" alt="Logo" id="logo" />
+      <div id="form-content">
+        <label for="source">Source:</label>
+        <input type="text" id="source" placeholder="Enter source location" />
+
+        <label for="destination" style="margin-top: 20px; margin-bottom: 20px"
+          >Destination:</label
+        >
+        <input
+          type="text"
+          id="destination"
+          placeholder="Enter destination location"
+        />
+
+        <button id="plan-route-button" onclick="showPopup()">Plan Route</button>
+      </div>
+    </div>
+
+    <div id="popup-container">
+      <p>Congratulations!</p>
+      <p>We Found You A biker!</p>
+      <img src="blank.png" alt="Logo" id="logo" />
+      <p>Juan dela Cruz</p>
+      <button onclick="redirectToRiderFee()">OK</button>
+    </div>
+
+    <div id="overlay"></div>
+
+    <script>
+      function showForm() {
+        document.getElementById("intro-container").style.display = "none";
+        document.getElementById("form-container").style.display = "block";
+      }
+
+      function showPopup() {
+        document.getElementById("popup-container").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      function showPopup() {
+        // Get source and destination values
+        var source = document.getElementById("source").value;
+        var destination = document.getElementById("destination").value;
+
+        // Redirect to the rider fee page with source and destination as parameters
+        window.location.href =
+          "rider_fee_page.html?source=" +
+          encodeURIComponent(source) +
+          "&destination=" +
+          encodeURIComponent(destination);
+      }
+
+      function redirectToRiderFee() {
+        // Redirect to the rider fee page
+        window.location.href = "rider_fee_page.html";
+      }
+
+      function closePopup() {
+        document.getElementById("popup-container").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
